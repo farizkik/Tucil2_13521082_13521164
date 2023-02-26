@@ -51,10 +51,12 @@ def merge(left_arr, right_arr, asc):
     return result
 
 # Testing
-# arr = [2.3, 3, 4.5, 2, 5, 1.5, -99.0, 203.000, -4323.000001, -2]
+# points (array of [x, y, z]) would be sorted according to x first (first element)
+points3D = [[2, 3.4, -5.02], [-9, -2.54, 0], [6, 6, 6], [9, 4.7, 0.2631], [9.23, 0.3, 7.3], [2, 4, 1], [7, 2, 3]]
+arr = [2.3, 3, 4.5, 2, 5, 1.5, -99.0, 203.000, -4323.000001, -2]
 # arr = ['a', 's', 'n', 'g', 'l', 'r', 'u', 'c', 'b']
-# print(mergeSort(arr, True))
-# print(mergeSort(arr, 1))
-# print(mergeSort(arr))
-# print(mergeSort(arr, False))
-# print(mergeSort(arr, 3))
+print(mergeSort(points3D, True))
+print(mergeSort(arr, 1))
+print(mergeSort(points3D))
+print(mergeSort(arr, False))
+print(mergeSort(points3D, 3))
