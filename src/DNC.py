@@ -69,5 +69,121 @@ def closestPair2D(points):
     
     # done, return minimum distance
     return minDist
-                        
-print(closestPair2D(points2d))
+
+# find pairs in 2D which are at most sigma distance apart
+def pairSearch2D(points,sigma):
+    N=len(points)
+    
+    # base case
+    if N==1:
+        return 0
+    if N==2:
+        if euclideanDistance(points[0][1:],points[1][1:])<=sigma:
+            return [[points[0],points[1]]]
+        
+    
+    # if N>2, Divide and Conquer
+    nearPair=[]
+    
+    # sort by y
+    points.sort(key= lambda x:(x[1],x[2]))
+    
+    # get midpoint
+    y0= points[N//2][1]
+    
+    # divide points to 2
+    leftpoints=points[:N//2]
+    rightpoints=points[N//2:]
+    
+    # get nearPairs from both left and right points
+    nearPairLeft=pairSearch2D(leftpoints,sigma)
+    nearPairRight=pairSearch2D(rightpoints,sigma)
+    
+    # insert to nearPair
+    if nearPairLeft!=0:
+        for pairs in nearPairLeft:
+            nearPair.append(pairs)
+    if nearPairRight!=0:
+        for pairs in nearPairRight:
+            nearPair.append(pairs)
+    
+    # construct the "strip" of d equals sigma
+    strip=[]
+    for p in leftpoints:
+        if abs(p[1]-y0)<=sigma:
+            strip.append(p)
+    for p in rightpoints:
+        if abs(p[1]-y0)<=sigma:
+            strip.append(p)
+            
+    # sort the strip points by z
+    strip.sort(key= lambda x:(x[2],x[1]))
+    Nstsrip=len(strip)
+    
+    # find ans
+    for i in range(Nstsrip):
+        for j in range(i+1,Nstsrip):
+            # sparsity condition, 
+            # don't care if y distance exceed sigma
+            if strip[j][1]-strip[i][1]>sigma:
+                break
+            if euclideanDistance(strip[i][1:],strip[j][1:])<=sigma:
+                nearPair.append([strip[i],strip[j]])
+    
+    # done, return nearPair
+    return nearPair
+
+def closestPair3D(points):
+    N=len(points)
+    
+    # base case
+    if N==1:
+        return inf
+    if N==2:
+        return euclideanDistance(points[0],points[1])
+    
+    # if N>2, Divide and Conquer
+    
+    # sort by x
+    points.sort()
+    
+    # get midpoint
+    x0= points[N//2][0]
+    
+    # divide x to 2
+    leftpoints=points[:N//2]
+    rightpoints=points[N//2:]
+    
+    # get closest dist in both sets of points, separately
+    d1=closestPair3D(leftpoints)
+    d2=closestPair3D(rightpoints)
+    
+    # get closest dist out of the two
+    d=min(d1,d2)
+    
+    # construct the "strip" 
+    # (eh tapi kalo 3d mah bukan strip yak tapi slab)
+    # gapapa deggh
+    strip=[]
+    for p in leftpoints:
+        if abs(p[0]-x0)<=d:
+            strip.append(p)
+    for p in rightpoints:
+        if abs(p[0]-x0)<=d:
+            strip.append(p)
+            
+    # get the strip, now we call closestPair2D
+    # BUT instead of closest pairs, 
+    # we need pairs whose projections are less than d apart
+    # it can be shown there are only at most O(n) numbers of these pairs
+    # (we can modify the closestPair2D function to have 2 modes)
+    # or just.. create new function altogether (pairSearch2D)
+    minDist=d
+    nearPairs=pairSearch2D(strip,d)
+    for pairs in nearPairs:
+        minDist=min(minDist, euclideanDistance(pairs[0],pairs[1]))
+    
+    # done, return minimum distance
+    return minDist
+
+print(closestPair3D(points3d))
