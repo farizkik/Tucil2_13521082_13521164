@@ -1,6 +1,5 @@
 from utilities import *
 
-
 # Brute Force Algorithm for Finding Closest Pair of Points
 def bruteForceClosestPair3D(points):
     n_euclidean_computing = 0

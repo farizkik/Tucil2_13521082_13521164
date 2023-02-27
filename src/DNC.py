@@ -4,7 +4,6 @@ points3d = [[1,2,3],[4,5,6],[2,3,4],[3,5,6],[7,8,9]]
 
 # remember to:
 # improve algo by changing sorting place (sort first before splicing)
-# change sort to custom made sort
 
 # find pairs in 2D which are at most sigma distance apart
 def pairSearch2D(points,sigma):
@@ -67,6 +66,12 @@ def pairSearch2D(points,sigma):
         for j in range(i+1,Nstsrip):
             # sparsity condition, 
             # don't care if y distance exceed sigma
+            
+            #experimental
+            #if [strip[i],strip[j]] in nearPair or [[strip[j],strip[i]]] in nearPair:
+            #    continue
+            #^^ experimental
+            
             if strip[j][gap]-strip[i][gap]>sigma:
                 break
             if euclideanDistance(strip[i][gap:],strip[j][gap:])<=sigma:
@@ -132,6 +137,11 @@ def pairSearchnD(points,sigma, dimension):
     nearPairProjection=pairSearchnD(strip,sigma,dimension-1)
     if nearPairProjection[0]!=0:
         for pairs in nearPairProjection[0]:
+            #experimental
+            #if [pairs[0],pairs[1]] in nearPair or [pairs[1],pairs[0]] in nearPair:
+            #    continue
+            #^^ experimental
+            
             if euclideanDistance(pairs[0][gap:],pairs[1][gap:])<=sigma:
                 nearPair.append(pairs)
             n_euclidean_computing+=1
@@ -285,7 +295,17 @@ def closestPairnD(points):
     # get the strip, now we call pairSearchnD for lower dimension
     minDist=d
     
-    nearPairs=pairSearchnD(strip,d,dimension-1)
+    if dimension<=10:
+        nearPairs=pairSearchnD(strip,d,dimension-1)
+    # recursive cuts down the number of points to check 
+    # not worth it to do recursive for higher dimension
+    # since complexity is O(nlog(n)^d-1), exponentially increase with d
+    # just immediately call last recursive (2 dimension) instead
+    # in theory this takes T(cn^2), where c is constant
+    # but the constant gets big for higher dimension too
+    # (though not as bad as the recursive function)
+    else:
+        nearPairs=pairSearch2D(strip,d)
     n_euclidean_computing += nearPairs[1]
     if nearPairs[0]!=0:
         for pairs in nearPairs[0]:

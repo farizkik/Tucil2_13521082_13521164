@@ -2,12 +2,19 @@ from DNC import *
 from bruteForce import *
 from pointsGenerator import *
 from utilities import *
+from timeit import default_timer as timer
 
 points, dimension = generateRandomPoints()
 
+start=timer()
 print(bruteForceClosestPairnD(points))
-print(closestPairnD(points))
+end=timer()
+print("Bruteforce time: " + str(end-start)+ " s") 
 
+start=timer()
+print(closestPairnD(points))
+end=timer()
+print("Divide and Conquer time: " + str(end-start)+ " s") 
 '''
 result = closestPairnD(points)
 minDist = result[0]
