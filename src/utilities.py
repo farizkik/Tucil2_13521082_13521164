@@ -80,7 +80,7 @@ print(mergeSort(points3D, 3))
 def scatterplot(x, y, z, colors):
     fig = plt.figure()
     ax = plt.axes(projection='3d')
-    ax.scatter(x, y, z, c=colors, cmap='viridis')
+    ax.scatter(x, y, z, c=colors)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
