@@ -7,14 +7,6 @@ points3d = [[1,2,3],[4,5,6],[2,3,4],[3,5,6],[7,8,9]]
 # improve algo by changing sorting place (sort first before splicing)
 # change sort to custom made sort
 
-# find distance between 2 points
-def euclideanDistance(a,b):
-    dimension=len(a)
-    temp=0
-    for i in range (dimension):
-        temp += (a[i]-b[i])*(a[i]-b[i])
-    return sqrt(temp)
-
 # closest pair in 2d
 def closestPair2D(points):
     N=len(points)
@@ -254,9 +246,9 @@ def closestPairnD(points):
     if dimension==2:
         return closestPair2D(points)
     if N==1:
-        return inf
+        return [inf,None]
     if N==2:
-        return euclideanDistance(points[0],points[1])
+        return [euclideanDistance(points[0],points[1]), [points[0],points[1]]]
     
     # if N>2, Divide and Conquer
     
@@ -270,12 +262,21 @@ def closestPairnD(points):
     leftpoints=points[:N//2]
     rightpoints=points[N//2:]
     
+    
     # get closest dist in both sets of points, separately
-    d1=closestPair3D(leftpoints)
-    d2=closestPair3D(rightpoints)
+    d1=closestPairnD(leftpoints)
+    d2=closestPairnD(rightpoints)
+    closestPair=None
     
     # get closest dist out of the two
-    d=min(d1,d2)
+    d=inf
+    if(d1[0]<d2[0]):
+        d=d1[0]
+        closestPair=d1[1]
+    else:
+        d=d2[0]
+        closestPair=d2[1]
+    
     
     # construct the "strip" 
     strip=[]
@@ -288,11 +289,15 @@ def closestPairnD(points):
             
     # get the strip, now we call pairSearchnD for lower dimension
     minDist=d
+    
     nearPairs=pairSearchnD(strip,d,dimension-1)
     for pairs in nearPairs:
+        temp=minDist
         minDist=min(minDist, euclideanDistance(pairs[0],pairs[1]))
+        if temp!=minDist :
+            closestPair=pairs
     
     # done, return minimum distance
-    return minDist
+    return [minDist,closestPair]
 
-print(closestPairnD(points3d))
+#print(closestPairnD(points3d))

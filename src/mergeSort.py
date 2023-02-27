@@ -50,6 +50,7 @@ def merge(left_arr, right_arr, asc):
         
     return result
 
+'''
 # Testing
 # points (array of [x, y, z]) would be sorted according to x first (first element)
 points3D = [[2, 3.4, -5.02], [-9, -2.54, 0], [6, 6, 6], [9, 4.7, 0.2631], [9.23, 0.3, 7.3], [2, 4, 1], [7, 2, 3]]
@@ -60,3 +61,4 @@ print(mergeSort(arr, 1))
 print(mergeSort(points3D))
 print(mergeSort(arr, False))
 print(mergeSort(points3D, 3))
+'''

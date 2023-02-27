@@ -38,6 +38,7 @@ def bruteForceClosestPairnD(points):
                 closest_pair = (points[i], points[j])
     return closest_pair, n_euclidean_computing
 
+'''
 # Testing
 points3D = [[2, 3.4, -5.02], [-9, -2.54, 0], [6, 6, 6], [9, 4.7, 0.2631], [9.23, 0.3, 7.3], [2, 4, 1], [7, 2, 3]]
 closest_pair, n_Computing = bruteForceClosestPair3D(points3D)
@@ -45,3 +46,4 @@ closest_pair, n_Computing = bruteForceClosestPair3D(points3D)
 print("Titik terdekat adalah", closest_pair)
 print("Dengan jarak", round(euclideanDistance(closest_pair[0], closest_pair[1]), 3))
 print("banyaknya operasi euclidean", n_Computing)
+'''

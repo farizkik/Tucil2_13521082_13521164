@@ -14,4 +14,4 @@ def generateRandomPoints():
         points.append(point)
     return points
 
-print(generateRandomPoints())
+#print(generateRandomPoints())
