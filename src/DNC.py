@@ -25,7 +25,8 @@ def pairSearch2D(points,sigma):
     nearPair=[]
     
     # sort by y
-    points.sort(key= lambda x:(x[gap]))
+    #points.sort(key= lambda x:(x[gap]))
+    points=mergeSort(points,1,gap)
     
     # get midpoint
     y0= points[N//2][gap]
@@ -57,7 +58,8 @@ def pairSearch2D(points,sigma):
             strip.append(p)
             
     # sort the strip points by z
-    strip.sort(key= lambda x:(x[gap+1]))
+    #strip.sort(key= lambda x:(x[gap+1]))
+    strip=mergeSort(strip,1,gap+1)
     Nstsrip=len(strip)
     
     # find ans
@@ -94,7 +96,8 @@ def pairSearchnD(points,sigma, dimension):
     nearPair=[]
     
     # sort by gap
-    points.sort(key= lambda x:(x[gap]))
+    #points.sort(key= lambda x:(x[gap]))
+    points=mergeSort(points,1,gap)
     
     # get midpoint
     mid= points[N//2][gap]
@@ -138,7 +141,7 @@ def pairSearchnD(points,sigma, dimension):
 # closest pair in 1d
 def closestPair1D(points):
     N=len(points)
-    points.sort()
+    points=mergeSort(points,1)
     minDist=inf
     closestPair=None
     n_euclidean_computing=0
@@ -166,7 +169,8 @@ def closestPair2D(points):
     # if N>2, Divide and Conquer
     
     # sort by x
-    points.sort()
+    #points.sort()
+    points=mergeSort(points)
     
     # get midpoint
     x0= points[N//2][0]
@@ -202,7 +206,9 @@ def closestPair2D(points):
             strip.append(p)
             
     # sort the strip points by y
-    strip.sort(key= lambda x:(x[1],x[0]))
+    
+    #strip.sort(key= lambda x:(x[1],x[0]))
+    strip=mergeSort(strip, 1,1)
     Nstsrip=len(strip)
     
     # find ans
@@ -240,7 +246,8 @@ def closestPairnD(points):
     # if N>2, Divide and Conquer
     
     # sort by x
-    points.sort()
+    #points.sort()
+    points=mergeSort(points)
     
     # get midpoint
     x0= points[N//2][0]
@@ -291,7 +298,6 @@ def closestPairnD(points):
     # done, return minimum distance
     return [minDist,closestPair,n_euclidean_computing]
 
-#print(closestPairnD(points3d))
 
 '''
 def closestPair3D(points):

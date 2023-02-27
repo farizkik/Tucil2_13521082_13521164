@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 import numpy as np
 
-# Merge Sort Algorithm Using Divide and Conquer Approach for Array
+# Merge Sort Algorithm Using Divide and Conquer Approach for Array of Points
 # in default, sorting would be ascending
-def mergeSort(arr, asc = 1):
+def mergeSort(arr, asc = 1, el=0):
     if len(arr) <= 1:
         return arr
     
@@ -14,15 +14,15 @@ def mergeSort(arr, asc = 1):
     left_arr = arr[:mid]
     right_arr = arr[mid:]
     
-    left_arr = mergeSort(left_arr, asc)
-    right_arr = mergeSort(right_arr, asc)
+    left_arr = mergeSort(left_arr, asc, el)
+    right_arr = mergeSort(right_arr, asc, el)
 
     # conquer
-    return merge(left_arr, right_arr, asc)
+    return merge(left_arr, right_arr, asc, el)
 
 
 # conquer implementation
-def merge(left_arr, right_arr, asc):
+def merge(left_arr, right_arr, asc,el):
     result = []
     left_idx = 0
     right_idx = 0
@@ -31,7 +31,7 @@ def merge(left_arr, right_arr, asc):
 
         # if ascending is True or 1 
         if (asc == 1):    
-            if left_arr[left_idx] <= right_arr[right_idx]:
+            if left_arr[left_idx][el] <= right_arr[right_idx][el]:
                 result.append(left_arr[left_idx])
                 left_idx += 1
             else:
@@ -40,7 +40,7 @@ def merge(left_arr, right_arr, asc):
         
         # if ascending is False or any other than 1, hence descending
         else:
-            if left_arr[left_idx] >= right_arr[right_idx]:
+            if left_arr[left_idx][el] >= right_arr[right_idx][el]:
                 result.append(left_arr[left_idx])
                 left_idx += 1
             else:
@@ -61,7 +61,6 @@ def euclideanDistance(a,b):
     for i in range (dimension):
         temp += (a[i]-b[i])*(a[i]-b[i])
     return sqrt(temp)
-
 
 
 '''
