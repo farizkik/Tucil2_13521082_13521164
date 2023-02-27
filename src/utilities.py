@@ -1,5 +1,6 @@
-# Merge Sort Algorithm Using Divide and Conquer Approach for Array
+from math import *
 
+# Merge Sort Algorithm Using Divide and Conquer Approach for Array
 # in default, sorting would be ascending
 def mergeSort(arr, asc = 1):
     if len(arr) <= 1:
@@ -49,6 +50,14 @@ def merge(left_arr, right_arr, asc):
         result.extend(right_arr[right_idx:])
         
     return result
+
+# find distance between 2 points
+def euclideanDistance(a,b):
+    dimension=len(a)
+    temp=0
+    for i in range (dimension):
+        temp += (a[i]-b[i])*(a[i]-b[i])
+    return sqrt(temp)
 
 '''
 # Testing

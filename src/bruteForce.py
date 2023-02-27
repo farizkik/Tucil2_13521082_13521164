@@ -1,13 +1,6 @@
-from math import *
+from utilities import *
 
 # Brute Force Algorithm for Finding Closest Pair of Points
-def euclideanDistance(a,b):
-    dimension=len(a)
-    temp=0
-    for i in range (dimension):
-        temp += (a[i]-b[i])*(a[i]-b[i])
-    return sqrt(temp)
-
 def bruteForceClosestPair3D(points):
     n_euclidean_computing = 0
     n = len(points)
