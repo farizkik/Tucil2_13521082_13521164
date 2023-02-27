@@ -1,4 +1,7 @@
 from math import *
+import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
+import numpy as np
 
 # Merge Sort Algorithm Using Divide and Conquer Approach for Array
 # in default, sorting would be ascending
@@ -73,3 +76,59 @@ print(mergeSort(points3D))
 print(mergeSort(arr, False))
 print(mergeSort(points3D, 3))
 '''
+
+# Create a 3D scatter plot of the points
+def scatterplot(x, y, z, colors):
+    fig = plt.figure()
+    ax = plt.axes(projection='3d')
+    ax.scatter(x, y, z, c=colors, cmap='viridis')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    plt.show()
+
+def visualize3D(points, closest_pair):
+    x = np.array([p[0] for p in points])
+    y = np.array([p[1] for p in points])
+    z = np.array([p[2] for p in points])
+
+    closest_pair_x1 = closest_pair[0][0]
+    closest_pair_x2 = closest_pair[1][0]
+    closest_pair_y1 = closest_pair[0][1]
+    closest_pair_y2 = closest_pair[1][1]
+    closest_pair_z1 = closest_pair[0][2]
+    closest_pair_z2 = closest_pair[1][2]
+
+    highlight = (x == closest_pair_x1) & (y == closest_pair_y1) & (z == closest_pair_z1) | (x == closest_pair_x2) & (y == closest_pair_y2) & (z == closest_pair_z2)
+    colors = np.where(highlight, 'r', 'b')
+
+    scatterplot(x, y, z, colors)
+
+def visualize2D(points, closest_pair):
+    x = np.array([p[0] for p in points])
+    y = np.array([p[1] for p in points])
+    z = np.array([0 for p in points])
+
+    closest_pair_x1 = closest_pair[0][0]
+    closest_pair_x2 = closest_pair[1][0]
+    closest_pair_y1 = closest_pair[0][1]
+    closest_pair_y2 = closest_pair[1][1]
+
+    highlight = (x == closest_pair_x1) & (y == closest_pair_y1) | (x == closest_pair_x2) & (y == closest_pair_y2)
+    colors = np.where(highlight, 'r', 'b')
+
+    scatterplot(x, y, z, colors)
+
+
+def visualize1D(points, closest_pair):
+    x = np.array([p[0] for p in points])
+    y = np.array([0 for p in points])
+    z = np.array([0 for p in points])
+
+    closest_pair_x1 = closest_pair[0][0]
+    closest_pair_x2 = closest_pair[1][0]
+
+    highlight = (x == closest_pair_x1) | (x == closest_pair_x2)
+    colors = np.where(highlight, 'r', 'b')
+
+    scatterplot(x, y, z, colors)
