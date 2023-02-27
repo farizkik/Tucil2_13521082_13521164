@@ -62,6 +62,8 @@ def euclideanDistance(a,b):
         temp += (a[i]-b[i])*(a[i]-b[i])
     return sqrt(temp)
 
+
+
 '''
 # Testing
 # points (array of [x, y, z]) would be sorted according to x first (first element)
