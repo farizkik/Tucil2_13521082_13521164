@@ -1,4 +1,4 @@
-# Closest Pair Searcher
+# Closest Pair Searcher - Tugas Kecil 2 Strategi Algoritma
 Tugas Kecil 2 untuk mata kuliah IF2211 Strategi Algoritma
 
 ## Deskripsi Program
