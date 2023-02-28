@@ -58,7 +58,7 @@ def closestPairnD(points):
     if N==1:
         return [inf,None,0]
     if N==2:
-        return [euclideanDistance(points[0],points[1]),[points[0],points[1]],1]
+        return [euclideanDistance(points[0],points[1]),[[points[0],points[1]]],1]
     
     # if N>2, Divide and Conquer
     
@@ -78,9 +78,14 @@ def closestPairnD(points):
     if(d1[0]<d2[0]):
         d=d1[0]
         closestPair=d1[1]
-    else:
+    elif(d1[0]>d2[0]):
         d=d2[0]
         closestPair=d2[1]
+    else:
+        d=d1[0]
+        closestPair=d1[1]
+        for pairs in d2[1]:
+            closestPair.append(pairs)
     
     #create strip
     leftstrip,rightstrip=stripMake(leftpoints,rightpoints,x0,d)
@@ -102,7 +107,9 @@ def closestPairnD(points):
             n_euclidean_computing+=1
             if temp<minDist:
                 minDist=temp
-                closestPair=[leftstrip[i],rightstrip[j]]
+                closestPair=[[leftstrip[i],rightstrip[j]]]
+            elif temp==minDist:
+                closestPair.append([leftstrip[i],rightstrip[j]])
     
     # done, return minimum distance
     return [minDist,closestPair,n_euclidean_computing]
