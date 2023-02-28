@@ -4,21 +4,8 @@ from pointsGenerator import *
 from utilities import *
 import time
 
+# Generate Points
 points, dimension = generateRandomPoints()
-
-# Finding Closest Pair with Brute Force Approach
-start = time.time()
-result = bruteForceClosestPairnD(points)
-end = time.time()
-
-print("\nWith Brute Force Approach:")
-print("the closest pair are between:", end=" ")
-print(result[1])
-print("with the minimum distance:", round(result[0], 3))
-print("the euclidean operation executed by:", result[2], "times")
-print("and execution time within:", end=" ")
-print("{0:.10f}".format(end-start), "seconds")
-
 
 # Finding Closest Pair with Divide n Conquer Approach
 start = time.time()
@@ -26,12 +13,27 @@ result = closestPairnD(points)
 end = time.time()
 
 print("\nWith Divide and Conquer Approach:")
-print("the closest pair are between:", end=" ")
-print(result[1])
-print("with the minimum distance:", round(result[0], 3))
+print("the closest pair:", end=" ")
+for i in result[1]:
+    print(i, end=' ')
+print("\nwith the minimum distance:", round(result[0], 3))
 print("the euclidean operation executed by:", result[2], "times")
 print("and execution time within:", end=" ")
 print("{0:.10f}".format(end-start), "seconds\n")
+
+# Finding Closest Pair with Brute Force Approach
+start = time.time()
+result = bruteForceClosestPairnD(points)
+end = time.time()
+
+print("\nWith Brute Force Approach:")
+print("the closest pair:", end=" ")
+for i in result[1]:
+    print(i, end=' ')
+print("\nwith the minimum distance:", round(result[0], 3))
+print("the euclidean operation executed by:", result[2], "times")
+print("and execution time within:", end=" ")
+print("{0:.10f}".format(end-start), "seconds")
 
 # Asking for visualization
 if (dimension == 3):

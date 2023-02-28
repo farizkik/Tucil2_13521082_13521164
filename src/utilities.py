@@ -1,6 +1,5 @@
 from math import *
 import matplotlib.pyplot as plt
-from mpl_toolkits import mplot3d
 import numpy as np
 
 # Merge Sort Algorithm Using Divide and Conquer Approach for Array of Points
@@ -62,72 +61,69 @@ def euclideanDistance(a,b):
         temp += (a[i]-b[i])*(a[i]-b[i])
     return sqrt(temp)
 
-
-'''
-# Testing
-# points (array of [x, y, z]) would be sorted according to x first (first element)
-points3D = [[2, 3.4, -5.02], [-9, -2.54, 0], [6, 6, 6], [9, 4.7, 0.2631], [9.23, 0.3, 7.3], [2, 4, 1], [7, 2, 3]]
-arr = [2.3, 3, 4.5, 2, 5, 1.5, -99.0, 203.000, -4323.000001, -2]
-# arr = ['a', 's', 'n', 'g', 'l', 'r', 'u', 'c', 'b']
-print(mergeSort(points3D, True))
-print(mergeSort(arr, 1))
-print(mergeSort(points3D))
-print(mergeSort(arr, False))
-print(mergeSort(points3D, 3))
-'''
-
 # Create a 3D scatter plot of the points
-def scatterplot(x, y, z, colors):
+def visualize3D(points, closest_pair_list):
     fig = plt.figure()
     ax = plt.axes(projection='3d')
-    ax.scatter(x, y, z, c=colors)
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
+
+    for i in range(len(points)):
+        flag = False
+        for j in range(len(closest_pair_list)):
+            if points[i] in closest_pair_list[j]:
+                flag = True
+        if not flag:
+            ax.scatter(points[i][0], points[i][1], points[i][2], c='b')
+        else:
+            ax.scatter(points[i][0], points[i][1], points[i][2], c='r')
+
+    for i in range(len(closest_pair_list)):
+        x = [closest_pair_list[i][0][0], closest_pair_list[i][1][0]]
+        y = [closest_pair_list[i][0][1], closest_pair_list[i][1][1]]
+        z = [closest_pair_list[i][0][2], closest_pair_list[i][1][2]]
+        ax.plot(x, y, z, c='r')
     plt.show()
 
-def visualize3D(points, closest_pair):
-    x = np.array([p[0] for p in points])
-    y = np.array([p[1] for p in points])
-    z = np.array([p[2] for p in points])
-
-    closest_pair_x1 = closest_pair[0][0]
-    closest_pair_x2 = closest_pair[1][0]
-    closest_pair_y1 = closest_pair[0][1]
-    closest_pair_y2 = closest_pair[1][1]
-    closest_pair_z1 = closest_pair[0][2]
-    closest_pair_z2 = closest_pair[1][2]
+def visualize2D(points, closest_pair_list):
+    fig = plt.figure()
+    ax = plt.axes(projection='3d')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    
+    for i in range(len(points)):
+        flag = False
+        for j in range(len(closest_pair_list)):
+            if points[i] in closest_pair_list[j]:
+                flag = True
+        if not flag:
+            ax.scatter(points[i][0], points[i][1], c='b')
+        else:
+            ax.scatter(points[i][0], points[i][1], c='r')
 
     highlight = (x == closest_pair_x1) & (y == closest_pair_y1) & (z == closest_pair_z1) | (x == closest_pair_x2) & (y == closest_pair_y2) & (z == closest_pair_z2)
-    colors = np.where(highlight, 'b', 'b')
-
-    scatterplot(x, y, z, colors)
-
-def visualize2D(points, closest_pair):
-    x = np.array([p[0] for p in points])
-    y = np.array([p[1] for p in points])
-    z = np.array([0 for p in points])
-
-    closest_pair_x1 = closest_pair[0][0]
-    closest_pair_x2 = closest_pair[1][0]
-    closest_pair_y1 = closest_pair[0][1]
-    closest_pair_y2 = closest_pair[1][1]
-
-    highlight = (x == closest_pair_x1) & (y == closest_pair_y1) | (x == closest_pair_x2) & (y == closest_pair_y2)
     colors = np.where(highlight, 'r', 'b')
 
-    scatterplot(x, y, z, colors)
+def visualize1D(points, closest_pair_list):
+    fig = plt.figure()
+    ax = plt.axes(projection='3d')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    
+    for i in range(len(points)):
+        flag = False
+        for j in range(len(closest_pair_list)):
+            if points[i] in closest_pair_list[j]:
+                flag = True
+        if not flag:
+            ax.scatter(points[i][0], 0, 0, c='b')
+        else:
+            ax.scatter(points[i][0], 0, 0, c='r')
 
-
-def visualize1D(points, closest_pair):
-    x = np.array([p[0] for p in points])
-    y = np.array([0 for p in points])
-    z = np.array([0 for p in points])
-
-    closest_pair_x1 = closest_pair[0][0]
-    closest_pair_x2 = closest_pair[1][0]
-
-    highlight = (x == closest_pair_x1) | (x == closest_pair_x2)
-    colors = np.where(highlight, 'r', 'b')
-
-    scatterplot(x, y, z, colors)
+    for i in range(len(closest_pair_list)):
+        x = [closest_pair_list[i][0][0], closest_pair_list[i][1][0]]
+        ax.plot(x, [0, 0], [0, 0], c='r')
+    plt.show()
