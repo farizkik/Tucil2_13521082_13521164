@@ -16,8 +16,8 @@ def stripMake(leftpoints,rightpoints,mid,sigma,gap=0):
     rightstrip=mergeSort(rightstrip, 1,1)
     return leftstrip,rightstrip
 
-# split points to left and right
-def splitPoints(points,gap=0):
+# divide points to left and right
+def divide(points,gap=0):
     N=len(points)
     
     # sort points
@@ -47,7 +47,7 @@ def closestPair1D(points):
             closestPair=[points[i],points[i+1]]
     return[minDist,closestPair,n_euclidean_computing]
     
-# closest pair in 2d
+# closest pair function
 def closestPairnD(points):
     N=len(points)
     dimension=len(points[0])
@@ -63,7 +63,7 @@ def closestPairnD(points):
     # if N>2, Divide and Conquer
     
     # split points to 2
-    leftpoints,rightpoints,x0=splitPoints(points)
+    leftpoints,rightpoints,x0=divide(points)
     
     # get closest dist in both sets of points, separately
     n_euclidean_computing=0

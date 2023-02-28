@@ -99,7 +99,7 @@ def visualize3D(points, closest_pair):
     closest_pair_z2 = closest_pair[1][2]
 
     highlight = (x == closest_pair_x1) & (y == closest_pair_y1) & (z == closest_pair_z1) | (x == closest_pair_x2) & (y == closest_pair_y2) & (z == closest_pair_z2)
-    colors = np.where(highlight, 'r', 'b')
+    colors = np.where(highlight, 'b', 'b')
 
     scatterplot(x, y, z, colors)
 
