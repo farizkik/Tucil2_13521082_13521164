@@ -29,9 +29,9 @@ def generateRandomPoints():
             # random float between 1000000 and 1000000
             # array representing the point, rounded to 3 floating numbers
             if(N<=5):
-                point.append(round(random.uniform(-10**6, 10**6), 3))
+                point.append(round(random.uniform(-10000, 10000), 3))
             else:
-                point.append(round(random.uniform(-10**3, 10**3), 3))
+                point.append(round(random.uniform(-1000, 1000), 3))
         points.append(point)
     return points, N
 
