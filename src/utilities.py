@@ -103,8 +103,11 @@ def visualize2D(points, closest_pair_list):
         else:
             ax.scatter(points[i][0], points[i][1], c='r')
 
-    highlight = (x == closest_pair_x1) & (y == closest_pair_y1) & (z == closest_pair_z1) | (x == closest_pair_x2) & (y == closest_pair_y2) & (z == closest_pair_z2)
-    colors = np.where(highlight, 'r', 'b')
+    for i in range(len(closest_pair_list)):
+        x = [closest_pair_list[i][0][0], closest_pair_list[i][1][0]]
+        y = [closest_pair_list[i][0][1], closest_pair_list[i][1][1]]
+        ax.plot(x, y, c='r')
+    plt.show()
 
 def visualize1D(points, closest_pair_list):
     fig = plt.figure()
