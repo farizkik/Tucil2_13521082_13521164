@@ -10,6 +10,7 @@ Terdapat juga visualizer untuk menunjukkan titik-titik yang digenerate beserta p
 
 ## Requirements
 Python 3.9.16
+Library matplotlib installed
 
 ## Cara Menggunakan Program
 ### Menginstall program
