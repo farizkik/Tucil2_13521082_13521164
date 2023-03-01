@@ -2,7 +2,7 @@
 Tugas Kecil 2 untuk mata kuliah IF2211 Strategi Algoritma
 
 ## Deskripsi Program
-Program ini ialah program yang digunakan untuk menentukan pasangan titik terdekat (closest pair) jika diberikan sejumlah titik pada dimensi tertentu. Dilakukan perbandingan antara penyelesaian masalah ini dengan menggunakan algoritma Bruteforce dan penyelesaian dengan menggunakan algoritma Divide and Conquer.\
+Program ini ialah program yang digunakan untuk menentukan pasangan titik terdekat (closest pair) jika diberikan sejumlah titik yang dibangkitkan secara acak pada dimensi tertentu. Dilakukan perbandingan penyelesaian masalah ini dengan menggunakan algoritma Bruteforce dan penyelesaian dengan menggunakan algoritma Divide and Conquer dalam segi efisiensi operasi penghitungan jarak euclidean dan waktu yang dibutuhkan.\
 \
 Pengguna dapat menentukan jumlah titik yang akan dirandom beserta jumlah dimensi yang dimiliki oleh titik-titik tersebut. Program akan kemudian menunjukkan titik terdekat antara titik-titik yang sudah digenerasikan, jaraknya dalam bilangan real, jumlah operasi euclidean yang dibutuhkan, beserta waktu yang dibutuhkan untuk masing-masing algoritma menemukan solusinya. \
 \
